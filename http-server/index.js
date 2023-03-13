@@ -1,7 +1,9 @@
 const http = require("http");
 const fs = require("fs");
 
-const port = process.argv[2];
+const args = process.argv.slice(2);
+const portI = args.indexOf('--port');
+const port = parseInt(args[portI + 1], 10);
 
 let homeContent;
 let projectContent;
@@ -29,8 +31,8 @@ fs.readFile("registration.html", (err, registration) => {
 });
 
 http.createServer((request, response) => {
-    let url = request.url;
     response.writeHeader(200, { "Content-Type": "text/html" });
+    let url = request.url;
     switch (url) {
       case "/project":
         response.write(projectContent);
