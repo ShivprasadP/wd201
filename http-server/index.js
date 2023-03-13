@@ -1,7 +1,7 @@
 const http = require("http");
 const fs = require("fs");
 
-const port = process.argv[2] || 5000;
+const port = process.argv[2];
 
 let homeContent = "";
 let projectContent = "";
