@@ -3,9 +3,9 @@ const fs = require("fs");
 
 const port = process.argv[2];
 
-let homeContent = "";
-let projectContent = "";
-let registrationContent = "";
+let homeContent;
+let projectContent;
+let registrationContent;
 
 fs.readFile("home.html", (err, home) => {
   if (err) {
