@@ -1,10 +1,10 @@
 const http = require('http')
 const fs = require('fs')
 
-const args = process.argv.slice(2)
-const portI = args.indexOf('--port')
+// const args = process.argv.slice(2)
+// const portI = args.indexOf('--port')
 // const default_port = 5000
-const port = parseInt(args[portI + 1], 10)
+const port = 5000
 
 let homeContent
 let projectContent
