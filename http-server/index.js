@@ -1,10 +1,11 @@
 const http = require('http')
 const fs = require('fs')
 
-// const args = process.argv.slice(2)
+const argv = require('yargs').argv
+const port = argv.port
 // const portI = args.indexOf('--port')
 // const default_port = 5000
-const port = 5000
+// const port = parseInt(args)
 
 let homeContent
 let projectContent
