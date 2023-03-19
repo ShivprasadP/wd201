@@ -1,9 +1,7 @@
 const http = require('http')
 const fs = require('fs')
 
-const args = process.argv.slice(2)
-const portIndex = args.findIndex(arg => arg === '--port')
-const port = portIndex !== -1 ? parseInt(args[portIndex + 1]) : 5000
+const port = require('minimist')(process.argv.slice(2))
 
 let homeContent
 let projectContent
