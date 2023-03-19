@@ -1,66 +1,51 @@
 const http = require('http')
 const fs = require('fs')
 
-const argv = require('yargs').argv
-const port = argv.port
-// const portI = args.indexOf('--port')
-// const default_port = 5000
-// const port = parseInt(args)
+const args = process.argv.slice(2)
+const portIndex = args.findIndex(arg => arg === '--port')
+const port = portIndex !== -1 ? parseInt(args[portIndex + 1]) : 5000
 
 let homeContent
 let projectContent
 let registrationContent
 
-fs.readFile('home.html', (err, home) => {
+fs.readFile('home.html', (err, data) => {
   if (err) {
     throw err
   }
-  homeContent = home
+  homeContent = data.toString()
 })
 
-fs.readFile('project.html', (err, project) => {
+fs.readFile('project.html', (err, data) => {
   if (err) {
     throw err
   }
-  projectContent = project
+  projectContent = data.toString()
 })
 
-fs.readFile('registration.html', (err, registration) => {
+fs.readFile('registration.html', (err, data) => {
   if (err) {
     throw err
   }
-  registrationContent = registration
+  registrationContent = data.toString()
 })
 
 const server = http.createServer((request, response) => {
-  if (request.url === '/') {
-    response.writeHead(200, { 'Content-Type': 'text/html' })
-    response.end(homeContent)
-  } else if (request.url === '/project') {
-    response.writeHead(200, { 'Content-Type': 'text/html' })
-    response.end(projectContent)
-  } else if (request.url === '/registration') {
-    response.writeHead(200, { 'Content-Type': 'text/html' })
-    response.end(registrationContent)
-  } else {
-    response.writeHead(404, { 'Content-Type': 'text/html' })
-    response.end('<h1>404 Not Found</h1>')
+  response.writeHeader(200, { 'Content-Type': 'text/html' })
+  const url = request.url
+  switch (url) {
+    case '/project':
+      response.write(projectContent)
+      response.end()
+      break
+    case '/registration':
+      response.write(registrationContent)
+      response.end()
+      break
+    default:
+      response.write(homeContent)
+      response.end()
+      break
   }
-  // response.writeHeader(200, { 'Content-Type': 'text/html' })
-  // const url = request.url
-  // switch (url) {
-  //   case '/project':
-  //     response.write(projectContent)
-  //     response.end()
-  //     break
-  //   case '/registration':
-  //     response.write(registrationContent)
-  //     response.end()
-  //     break
-  //   default:
-  //     response.write(homeContent)
-  //     response.end()
-  //     break
-  // }
 })
 server.listen(port)
