@@ -11,21 +11,21 @@ const todoList = () => {
       // Write the date check condition here and return the array
       // of overdue items accordingly.
       const today = new Date();
-      return all.filter(item => !item.completed && new Date(item.dueDate) < today);
+      return all.filter(item =>  new Date(item.dueDate) < today);
     }
   
     const dueToday = () => {
       // Write the date check condition here and return the array
       // of todo items that are due today accordingly.
       const today = new Date();
-      return all.filter(item => !item.completed && new Date(item.dueDate).toDateString() === today.toDateString());
+        return all.filter(item => new Date(item.dueDate).toDateString() === today.toDateString());
     }
   
     const dueLater = () => {
       // Write the date check condition here and return the array
       // of todo items that are due later accordingly.
       const today = new Date();
-      return all.filter(item => !item.completed && new Date(item.dueDate) > today);
+      return all.filter(item => new Date(item.dueDate) > today);
     }
   
     const toDisplayableList = (list) => {
@@ -66,12 +66,8 @@ const formattedDate = d => {
 
 var dateToday = new Date()
 const today = formattedDate(dateToday)
-const yesterday = formattedDate(
-  new Date(new Date().setDate(dateToday.getDate() - 1))
-)
-const tomorrow = formattedDate(
-  new Date(new Date().setDate(dateToday.getDate() + 1))
-)
+const yesterday = formattedDate(new Date(new Date().setDate(dateToday.getDate() - 1)))
+const tomorrow = formattedDate(new Date(new Date().setDate(dateToday.getDate() + 1)))
 
 todos.add({ title: 'Submit assignment', dueDate: yesterday, completed: false })
 todos.add({ title: 'Pay rent', dueDate: today, completed: true })
