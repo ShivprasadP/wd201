@@ -11,7 +11,7 @@ const todoList = () => {
       // Write the date check condition here and return the array
       // of overdue items accordingly.
       const today = new Date();
-      return all.filter(item => !item.completed && new Date(item.dueDate) < today);
+      return all.filter(item => !item.completed && new Date(item.dueDate).toDateString() < today.toDateString());
     }
   
     const dueToday = () => {
@@ -25,7 +25,7 @@ const todoList = () => {
       // Write the date check condition here and return the array
       // of todo items that are due later accordingly.
       const today = new Date();
-      return all.filter(item => new Date(item.dueDate) > today);
+      return all.filter(item => new Date(item.dueDate).toDateString() > today.toDateString());
     }
   
     const toDisplayableList = (list) => {
@@ -36,7 +36,14 @@ const todoList = () => {
       let checkbox = list[i].completed ? "[x]" : "[ ]";
       let title = list[i].title;
       let dueDate = list[i].dueDate;
-      displayableList += checkbox + " " + title + " " + dueDate + "\n";
+      if(dueDate == today)
+      {
+        displayableList += checkbox + " " + title  + "\n";
+      }
+      else
+      {
+        displayableList += checkbox + " " + title + " " + dueDate + "\n";
+      }
     }
     return displayableList;
 
@@ -55,10 +62,10 @@ const todoList = () => {
   };
   
   // ####################################### #
-  // DO NOT CHANGE ANYTHING BELOW THIS LINE. #
-  // ####################################### #
-  
-  const todos = todoList();
+// DO NOT CHANGE ANYTHING BELOW THIS LINE. #
+// ####################################### #
+
+const todos = todoList();
 
 const formattedDate = d => {
   return d.toISOString().split("T")[0]
@@ -66,8 +73,12 @@ const formattedDate = d => {
 
 var dateToday = new Date()
 const today = formattedDate(dateToday)
-const yesterday = formattedDate(new Date(new Date().setDate(dateToday.getDate() - 1)))
-const tomorrow = formattedDate(new Date(new Date().setDate(dateToday.getDate() + 1)))
+const yesterday = formattedDate(
+  new Date(new Date().setDate(dateToday.getDate() - 1))
+)
+const tomorrow = formattedDate(
+  new Date(new Date().setDate(dateToday.getDate() + 1))
+)
 
 todos.add({ title: 'Submit assignment', dueDate: yesterday, completed: false })
 todos.add({ title: 'Pay rent', dueDate: today, completed: true })
