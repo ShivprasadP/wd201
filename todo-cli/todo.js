@@ -38,11 +38,11 @@ const todoList = () => {
       let dueDate = list[i].dueDate;
       if(dueDate == today)
       {
-        displayableList += checkbox + " " + title  + "\n";
+        displayableList += checkbox + " " + title ;
       }
       else
       {
-        displayableList += checkbox + " " + title + " " + dueDate + "\n";
+        displayableList += checkbox + " " + title + " " + dueDate ;
       }
     }
     return displayableList;
