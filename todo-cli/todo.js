@@ -36,13 +36,10 @@ const todoList = () => {
       let checkbox = list[i].completed ? "[x]" : "[ ]";
       let title = list[i].title;
       let dueDate = list[i].dueDate;
-      if(dueDate == today)
+      displayableList += checkbox + " " + title;
+      if(dueDate != today)
       {
-        displayableList += checkbox + " " + title ;
-      }
-      else
-      {
-        displayableList += checkbox + " " + title + " " + dueDate ;
+        displayableList += dueDate;
       }
     }
     return displayableList;
